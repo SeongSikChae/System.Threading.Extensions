@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace System.Threading.Atomic
+﻿namespace System.Threading.Atomic
 {
 	/// <summary>
 	/// System.Boolean 에 대한 원자성을 보장합니다.
@@ -8,15 +6,15 @@ namespace System.Threading.Atomic
 	/// <param name="initialValue"></param>
 	public sealed class AtomicBool(bool initialValue = false) : IAtomic<bool>
 	{
-		private int atomicValue = initialValue ? 1 : 0;
+		private readonly AtomicInt32 atomicValue = initialValue ? new AtomicInt32(1) : new AtomicInt32();
 
 		/// <summary>
 		/// 원자성이 보장되는 상태로 System.Boolean 값을 읽고 씁니다.
 		/// </summary>
 		public bool Value
 		{
-			get => Interlocked.CompareExchange(ref Unsafe.AsRef(in atomicValue), 0, 0) == 1;
-			set => Interlocked.Exchange(ref atomicValue, value ? 1 : 0);
+			get => atomicValue.Value == 1;
+			set => atomicValue.Value = (value ? 1 : 0);
 		}
 
 		/// <summary>
@@ -38,7 +36,7 @@ namespace System.Threading.Atomic
 		/// <returns>변경 여부</returns>
 		public bool CompareAndSet(bool expect, bool update)
 		{
-			return Interlocked.CompareExchange(ref Unsafe.AsRef(in atomicValue), update ? 1 : 0, expect ? 1 : 0) == (expect ? 1 : 0);
+			return atomicValue.CompareAndSet(expect ? 1 : 0, update ? 1 : 0);
 		}
 
 		/// <summary>
@@ -90,6 +88,15 @@ namespace System.Threading.Atomic
 		public bool IncrementThenGet()
 		{
 			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// AtomicBool 에 대한 ToString Override
+		/// </summary>
+		/// <returns></returns>
+		public override string ToString()
+		{
+			return $"{atomicValue.Value == 1}";
 		}
 	}
 }
