@@ -15,4 +15,11 @@
     <Description>.NET System.Threading namespace Extensions</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Extensions" Version="1.0.0" />
+    <PackageReference Include="Quartz" Version="3.13.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="System.Extensions" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>
