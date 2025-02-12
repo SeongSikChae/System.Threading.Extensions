@@ -24,7 +24,7 @@ namespace System.Threading.PerformanceCounter
 		{
 			StringBuilder sb = new StringBuilder();
 			foreach (KeyValuePair<string, PerformanceMetric> pair in dic)
-				sb.Append($"{pair.Key}:{pair.Value.Count:N0}/{pair.Value:N0};");
+				sb.Append($"{pair.Key}:{pair.Value.Count:N0}/{pair.Value.Total:N0};");
 			logger.Information(sb.ToString());
 		}
 	}
