@@ -15,6 +15,8 @@ namespace System.Threading.Tasks
 	{
 		private readonly ConcurrentDictionary<string, ITaskWorker> tasks = new ConcurrentDictionary<string, ITaskWorker>();
 
+		private bool disposedValue = false;
+
 		/// <summary>
 		/// TimeSpan Interval 주기로 실행되는 태스크 스케줄 추가
 		/// </summary>
@@ -111,6 +113,18 @@ namespace System.Threading.Tasks
 				if (tasks.TryGetValue(id, out ITaskWorker? worker))
 					worker.Join();
 				logger.Information($"shutdown completed '{id}'");
+			}
+		}
+
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		public void Dispose()
+		{
+			if (!disposedValue)
+			{
+				disposedValue = true;
+				WaitForShutdown();
 			}
 		}
 	}

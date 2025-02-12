@@ -5,7 +5,7 @@ namespace System.Threading.Tasks
 	/// <summary>
 	/// TaskScheduler 인터페이스
 	/// </summary>
-	public interface ITaskScheduler
+	public interface ITaskScheduler : IDisposable
 	{
 		/// <summary>
 		/// TimeSpan Interval 주기로 실행되는 태스크 스케줄 추가

@@ -52,10 +52,16 @@ namespace System.Threading.PerformanceCounter
 			performaceLogListener.Listen(dic);
 		}
 
+		private bool disposedValue;
+
 		/// <inheritdoc />
 		public override void Dispose()
 		{
-			taskScheduler.RemoveTask(TASK_ID);
+			if (!disposedValue) 
+			{
+				disposedValue = true;
+				taskScheduler.RemoveTask(TASK_ID);
+			}
 		}
 	}
 }
