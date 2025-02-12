@@ -7,7 +7,7 @@
     <RootNamespace />
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>SeongSikChae</Authors>
     <PackageProjectUrl>https://github.com/SeongSikChae/System.Threading.Extensions.git</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SeongSikChae/System.Threading.Extensions.git</RepositoryUrl>

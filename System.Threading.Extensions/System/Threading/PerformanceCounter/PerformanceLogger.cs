@@ -46,6 +46,7 @@ namespace System.Threading.PerformanceCounter
 				long total = pair.Value.Counter.Value;
 				metric.Count = total - pair.Value.Previous;
 				metric.Total = total;
+				pair.Value.Previous = total;
 				dic.Add(pair.Key, metric);
 			}
 			performaceLogListener.Listen(dic);
