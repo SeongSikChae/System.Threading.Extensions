@@ -32,7 +32,7 @@
 			using ICountdown countdown = CountdownFactory.Create(1);
 			countdown.Signal(1);
 			Assert.AreEqual(0, countdown.CurrentCount);
-			Assert.ThrowsException<InvalidOperationException>(() => countdown.Signal(1));
+			Assert.ThrowsExactly<InvalidOperationException>(() => countdown.Signal(1));
 		}
 
 		[TestMethod]
